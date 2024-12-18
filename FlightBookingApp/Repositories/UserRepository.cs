@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using FlightBookingApp.Entities;
+using FlightBookingApp.Models;
 
 namespace FlightBookingApp.Repositories
 {
@@ -14,7 +15,6 @@ namespace FlightBookingApp.Repositories
         {
             context= new FlightContext();   
         }
-
         public void AddUser(User user)
         {
            context.users.Add(user);
@@ -27,12 +27,7 @@ namespace FlightBookingApp.Repositories
             context.SaveChanges();
         }
 
-        public void CancelBooking(string id)
-        {
-            var Booking = context.userBookings.SingleOrDefault(m => m.BookingId == id);
-            context.userBookings.Remove(Booking);
-            context.SaveChanges();
-        }
+
 
         public void DeleteUser(string id)
         {
@@ -42,17 +37,44 @@ namespace FlightBookingApp.Repositories
 
         }
 
-        public List<UserBooking> GetBookingHistory(string id)
+        public List<UserBooking> GetBookingHistory(string userid)
         {
-            var bookings = context.userBookings.Where(m=>m.UserId==id).ToList();
+            var bookings = context.userBookings.Where(m=>m.UserId==userid).ToList();
             return bookings;
         }
 
-        public List<FlightSchedule> GetFlights(string source, string destination)
+        public List<FlightScheduleDTO> GetFlights(string source, string destination)
         {
-            var flights = context.flightSchedules.Where(m => m.DepartureLoc == source && m.ArrivalLocation==destination).ToList();
-            return flights;
+            var list = (from flightSchedule in context.flightSchedules
+                        join flightDetails in context.flightDetails
+                        on flightSchedule.FlightNumber equals flightDetails.FlightNumber
+                        where (flightSchedule.DepartureLoc == source && flightSchedule.ArrivalLocation == destination)
+                        select new FlightScheduleDTO()
+                        {
+                            ScheduleId = flightSchedule.ScheduleId,
+                            FlightNumber = flightSchedule.FlightNumber,
+                            Airline = flightDetails.Airline,
+                            DepartureTime = flightSchedule.DepartureTime,
+                            ArrivalTime = flightSchedule.ArrivalTime,
+                            Duration = flightSchedule.Duration,
+                            FlightDate = flightSchedule.FlightDate,
+                            DepartureLoc = flightSchedule.DepartureLoc,
+                            ArrivalLocation = flightSchedule.ArrivalLocation
+                        }).ToList();
+            return list;
 
+        }
+
+        public User GetUser(string userid)
+        {
+            var user = context.users.Find(userid);
+            return user;
+        }
+
+        public User Check(string email, string password)
+        {
+            var user = context.users.SingleOrDefault(m => m.Email == email && m.password == password);
+            return user;
         }
 
         public void UpdateUser(User user)
@@ -66,6 +88,24 @@ namespace FlightBookingApp.Repositories
             context.SaveChanges();
         }
 
-        
+        public void CancelBooking(string bookingid)
+        {
+            var booking=context.userBookings.Find(bookingid);
+            context.userBookings.Remove(booking);
+            context.SaveChanges();
+        }
+
+        public UserBooking GetBooking(string bookingid)
+        {
+            var booking = context.userBookings.Find(bookingid);
+            return booking;
+        }
+
+        public FlightDetail Getflightdetails(string flightnumber)
+        {
+            var detail = context.flightDetails.Find(flightnumber);
+            return detail;
+        }
+
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using FlightBookingApp.Models;
 
 namespace FlightBookingApp.Repositories
 {
@@ -15,18 +16,7 @@ namespace FlightBookingApp.Repositories
             context = new FlightContext();
         }
 
-        public void ApplyForAccount(AuthenticateAgent agent)
-        {
-            try
-            {
-                context.authenticateAgents.Add(agent);
-                context.SaveChanges();
-            }
-            catch(Exception)
-            {
-                throw;
-            }
-        }
+
 
         public void BookTicket(AgentBooking agentBooking)
         {
@@ -54,30 +44,18 @@ namespace FlightBookingApp.Repositories
 
         }
 
-        public void CancelBooking(string bookingId)
+        public void CancelBooking(string bookingid)
         {
-            try
-            {
-                var booking = context.agentBookings.Find(bookingId);
-                if (booking != null)
-                {
-                    context.agentBookings.Remove(booking);
-                    context.SaveChanges();
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
+            var booking = context.agentBookings.Find(bookingid);
+            context.agentBookings.Remove(booking);
+            context.SaveChanges();
         }
 
-        public List<AgentBooking> GetBookingHistory(string agentId, DateTime startDate, DateTime endDate)
+        public List<AgentBooking> GetBookingHistory(string agentId)
         {
             try
             {
-                var bookings = context.agentBookings.Where(x => x.AgentId == agentId && (x.BookingDate >= startDate 
-                && x.BookingDate <= endDate)).ToList();
+                var bookings = context.agentBookings.Where(x => x.AgentId == agentId).ToList();
                 return bookings;
             }
             catch (Exception)
@@ -95,7 +73,7 @@ namespace FlightBookingApp.Repositories
                 var editBooking = context.agentBookings.Find(agentBooking.BookingId);
                 if (editBooking != null)
                 {
-                    editBooking.UserName = agentBooking.UserName;
+                    editBooking.CustomerName = agentBooking.CustomerName;
                     editBooking.SeatNumber = agentBooking.SeatNumber;
                     context.SaveChanges();
                 }
@@ -105,7 +83,50 @@ namespace FlightBookingApp.Repositories
 
                 throw;
             }
-           
+        }
+        public Agent Check(string email, string password)
+        {
+            var agent = context.agents.SingleOrDefault(m => m.Email == email && m.password == password);
+            return agent;
+        }
+        public void AddAgent(Agent agent)
+        {
+            context.agents.Add(agent);
+            context.SaveChanges();
+        }
+
+        public AgentBooking GetBooking(string bookingid)
+        {
+            var booking = context.agentBookings.Find(bookingid);
+            return booking;
+        }
+
+        public List<FlightScheduleDTO> GetFlights(string source, string destination)
+        {
+            var list = (from flightSchedule in context.flightSchedules
+                        join flightDetails in context.flightDetails
+                        on flightSchedule.FlightNumber equals flightDetails.FlightNumber
+                        where (flightSchedule.DepartureLoc == source && flightSchedule.ArrivalLocation == destination)
+                        select new FlightScheduleDTO()
+                        {
+                            ScheduleId = flightSchedule.ScheduleId,
+                            FlightNumber = flightSchedule.FlightNumber,
+                            Airline = flightDetails.Airline,
+                            DepartureTime = flightSchedule.DepartureTime,
+                            ArrivalTime = flightSchedule.ArrivalTime,
+                            Duration = flightSchedule.Duration,
+                            FlightDate = flightSchedule.FlightDate,
+                            DepartureLoc = flightSchedule.DepartureLoc,
+                            ArrivalLocation = flightSchedule.ArrivalLocation
+                        }).ToList();
+            return list;
+
+        }
+
+        public FlightDetail Getflightdetails(string flightnumber)
+        {
+            var detail = context.flightDetails.Find(flightnumber);
+            return detail;
         }
     }
 }

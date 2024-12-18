@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace FlightBookingApp.Controllers
 {
-    [RoutePrefix("AgentController")]
+    [RoutePrefix("Agent")]
     public class AgentController : ApiController
     {
         private IAgentRepository agentRepository;
@@ -17,75 +17,20 @@ namespace FlightBookingApp.Controllers
         {
             agentRepository = new AgentRepository();
         }
-        [HttpPost,Route("registeragent")]
-        public IHttpActionResult ApplyForAccount([FromBody]AuthenticateAgent agent)
+
+
+        [HttpPost, Route("addbooking")]
+        public IHttpActionResult AddBooking(AgentBooking booking)
         {
             try
             {
-                agentRepository.ApplyForAccount(agent);
-                return Ok(agent);
+                agentRepository.BookTicket(booking);
+                return Ok();
             }
             catch (Exception)
             {
 
-                throw;
-            }
-        }
-
-        [HttpPost,Route("bookticket")]
-        public IHttpActionResult BookTicket([FromBody]AgentBooking agentBooking)
-        {
-            try
-            {
-                agentRepository.BookTicket(agentBooking);
-                return Ok(agentBooking);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        [HttpGet,Route("totalcommission")]
-        public IHttpActionResult CalculateCommission(string agentId, DateTime startDate, DateTime endDate)
-        {
-            try
-            {
-                var totalcommission=agentRepository.CalculateCommission(agentId, startDate, endDate);
-                return Ok(totalcommission);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        [HttpDelete, Route("CancelBooking/{bookingId}")]
-        public IHttpActionResult CancelBooking(string bookingId)
-        {
-            try
-            {
-                agentRepository.CancelBooking(bookingId);
-                return Ok("Deleted");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet, Route("BookingHistory/{agentId}/{startDate}/{endDate}")]
-        public IHttpActionResult GetBookingHistory(string agentId, DateTime startDate,  DateTime endDate)
-        {
-            try
-            {
-                var bookings = agentRepository.GetBookingHistory(agentId, startDate, endDate);
-                return Ok(bookings);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
+                return BadRequest("Booking cannot be added");
             }
         }
 
@@ -97,13 +42,116 @@ namespace FlightBookingApp.Controllers
                 agentRepository.UpdateBooking(agentBooking);
                 return Ok(agentBooking);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return BadRequest(ex.Message);
+                return BadRequest("Booking cannot be updated");
+            }
+        }
+
+        [HttpGet, Route("check/{email}/{password}")]
+        public IHttpActionResult Check(string email, string password)
+        {
+            try
+            {
+                var agent = agentRepository.Check(email, password);
+                return Ok(agent);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("Agent cannot be fetched");
+            }
+        }
+        [HttpPost, Route("register")]
+        public IHttpActionResult RegisterAgent([FromBody] Agent agent)
+        {
+            try
+            {
+                agentRepository.AddAgent(agent);
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("Agent cannnot be registered");
+            }
+        }
+
+        [HttpGet, Route("bookhistory/{agentid}")]
+        public IHttpActionResult GetBookingHistory(string agentid)
+        {
+            try
+            {
+                var history = agentRepository.GetBookingHistory(agentid);
+                return Ok(history);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("Booking history cannot be fetched");
+            }
+        }
+
+        [HttpDelete, Route("cancelbooking/{bookingid}")]
+        public IHttpActionResult CancelBooking(string bookingid)
+        {
+            try
+            {
+                agentRepository.CancelBooking(bookingid);
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("Booking cannot be cancelled");
             }
         }
 
 
+        [HttpGet, Route("getbooking/{bookingid}")]
+        public IHttpActionResult GetBooking(string bookingid)
+        {
+            try
+            {
+                var booking = agentRepository.GetBooking(bookingid);
+                return Ok(booking);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("Booking cannot be fetched");
+            }
+        }
+
+        [HttpGet, Route("searchflights/{source}/{destination}")]
+        public IHttpActionResult GetFlights(string source, string destination)
+        {
+            try
+            {
+                var flights = agentRepository.GetFlights(source, destination);
+                return Ok(flights);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("Flights cannot be fetched");
+            }
+        }
+
+        [HttpGet, Route("flightdetails/{flightnumber}")]
+        public IHttpActionResult GetFlightDetails(string flightnumber)
+        {
+            try
+            {
+                var detail = agentRepository.Getflightdetails(flightnumber);
+                return Ok(detail);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("Flight details cannot be fetched");
+            }
+        }
 
     }
 }

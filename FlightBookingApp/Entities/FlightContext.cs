@@ -16,12 +16,9 @@ namespace FlightBookingApp.Entities
         public DbSet<Admin> admins { get; set; }    
         public DbSet<Agent>agents { get; set; }
         public DbSet<AgentBooking> agentBookings { get; set; } 
-        public DbSet<AirportDetail> airportDetails { get; set; }   
-        public DbSet<AuthenticateAgent>authenticateAgents { get; set; }
         public DbSet<UserBooking>userBookings { get; set; }
         public DbSet<FlightDetail>flightDetails    { get; set; }
         public DbSet<FlightSchedule>flightSchedules { get; set; }
-        public DbSet<Payment>payments { get; set; }
 
     }
 }

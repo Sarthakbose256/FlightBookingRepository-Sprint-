@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Search Flights";
+}
+
+<h2>Search Flights</h2>
+
+@using (Html.BeginForm("GetFlights", "Agent", FormMethod.Get, new { @class = "search-form" }))
+{
+    <div>
+        <label for="source">Source</label>
+        <input type="text" name="source" id="source" required placeholder="Enter source city" />
+    </div>
+    <div>
+        <label for="destination">Destination</label>
+        <input type="text" name="destination" id="destination" required placeholder="Enter destination city" />
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+}

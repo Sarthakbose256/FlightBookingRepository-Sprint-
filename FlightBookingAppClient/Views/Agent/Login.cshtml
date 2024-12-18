@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+@model FlightBookingAppClient.Models.Login
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Flight Booking</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background-color: #f4f4f4;
+        }
+
+        .login-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                font-weight: bold;
+            }
+
+        .form-control {
+            width: 100%;
+        }
+
+        .btn-primary {
+            width: 100%;
+        }
+
+        .btn-role {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-form">
+            <h2 class="text-center">SkyLink Login</h2>
+
+            @using (Html.BeginForm("Login", "Agent", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email)
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Enter your email" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.password)
+                    @Html.PasswordFor(model => model.password, new { @class = "form-control", placeholder = "Enter your password" })
+                    @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                </div>
+
+                <button type="submit" class="btn btn-primary">Login</button>
+            }
+
+            <div class="text-center mt-3">
+                <a href="@Url.Action("Register", "Agent")" class="btn btn-role btn-info">Register as Agent</a>
+            </div>
+            <p>
+                @ViewBag.message
+            </p>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+</body>
+</html>
+
+
+

@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace FlightBookingApp.Controllers
 {
-    [RoutePrefix("UserController")]
+    [RoutePrefix("User")]
     public class UserController : ApiController
     {
         private IUserRepository repository;
@@ -18,48 +18,7 @@ namespace FlightBookingApp.Controllers
         {
             repository = new UserRepository();
         }
-        [HttpPost,Route("adduser")]
-        public IHttpActionResult CreateUser([FromBody] User user)
-        {
-            try
-            {
-                repository.AddUser(user);
-                return Ok(user);
-            }
-            catch (Exception)
-            {
 
-                throw;
-            }
-        }
-        [HttpPost,Route("ticketbooking")]
-        public IHttpActionResult BookTicket([FromBody] UserBooking userbooking)
-        {
-            try
-            {
-                repository.BookTicket(userbooking);
-                return Ok(userbooking);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-        [HttpDelete,Route("cancelBooking/{id}")]
-        public IHttpActionResult CancelBooking(string id)
-        {
-            try
-            {
-                repository.CancelBooking(id);
-                return Ok();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
         [HttpDelete,Route("removeuser/{id}")]
         public IHttpActionResult RemoveUser(string id)
         {
@@ -71,21 +30,21 @@ namespace FlightBookingApp.Controllers
             catch (Exception)
             {
 
-                throw;
+                return BadRequest("User cannot be removed");
             }
         }
-        [HttpGet,Route("bookhistory/{id}")]
-        public IHttpActionResult GetBookingHistory(string id)
+        [HttpGet,Route("bookhistory/{userid}")]
+        public IHttpActionResult GetBookingHistory(string userid)
         {
             try
             {
-                var history = repository.GetBookingHistory(id);
+                var history = repository.GetBookingHistory(userid);
                 return Ok(history);
             }
             catch (Exception)
             {
 
-                throw;
+                return BadRequest("Booking history not found");
             }
         }
         [HttpGet,Route("searchflights/{source}/{destination}")]
@@ -99,7 +58,7 @@ namespace FlightBookingApp.Controllers
             catch (Exception)
             {
 
-                throw;
+                return BadRequest("Flights not found");
             }
         }
         [HttpPut,Route("userupdate")]
@@ -113,8 +72,115 @@ namespace FlightBookingApp.Controllers
             catch (Exception)
             {
 
-                throw;
+                return BadRequest("User cannot be updated");
             }
         }
+
+        [HttpGet,Route("check/{email}/{password}")]
+        public IHttpActionResult Check(string email,string password)
+        {
+            try
+            {
+                var user = repository.Check(email, password);
+                return Ok(user);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("No user found");
+            }
+        }
+
+        [HttpDelete, Route("cancelbooking/{bookingid}")]
+        public IHttpActionResult CancelBooking(string bookingid)
+        {
+            try
+            {
+                repository.CancelBooking(bookingid);
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("Booking cannot be cancelled");
+            }
+        }
+
+        [HttpGet,Route("getbooking/{bookingid}")]
+        public IHttpActionResult GetBooking(string bookingid)
+        {
+            try
+            {
+                var booking = repository.GetBooking(bookingid);
+                return Ok(booking);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("Booking cannot be fetched");
+            }
+        }
+
+        [HttpGet,Route("userdetails/{userid}")]
+        public IHttpActionResult GetUser(string userid)
+        {
+            try
+            {
+                var user = repository.GetUser(userid);
+                return Ok(user);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("User cannot be fetched");
+            }
+        }
+
+        [HttpGet,Route("flightdetails/{flightnumber}")]
+        public IHttpActionResult GetFlightDetails(string flightnumber)
+        {
+            try
+            {
+                var detail = repository.Getflightdetails(flightnumber);
+                return Ok(detail);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("Flights cannot be fetched");
+            } 
+        }
+
+        [HttpPost,Route("addbooking")]
+        public IHttpActionResult AddBooking(UserBooking booking)
+        {
+            try
+            {
+                repository.BookTicket(booking);
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("Error while adding bookings");
+            }
+        }
+
+        [HttpPost,Route("register")]
+        public IHttpActionResult RegisterUser([FromBody]User user)
+        {
+            try
+            {
+                repository.AddUser(user);
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("User cannot be registered");
+            }
+        }
+
+     
     }
 }

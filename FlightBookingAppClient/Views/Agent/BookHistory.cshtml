@@ -1,0 +1,60 @@
+﻿@model IEnumerable<FlightBookingAppClient.Models.AgentBooking>
+
+@{
+    ViewBag.Title = "BookHistory";
+}
+
+<h2>BookHistory</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CustomerName)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.Mobile)</th>
+            <th>@Html.DisplayNameFor(model => model.FlightNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.SeatNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.FlightDate)</th>
+            <th>@Html.DisplayNameFor(model => model.TicketPrice)</th>
+            <th>@Html.DisplayNameFor(model => model.BookingDate)</th>
+            <th>@Html.DisplayNameFor(model => model.CommissionEarned)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                <td>@Html.DisplayNameFor(model => model.Email)</td>
+                <td>@Html.DisplayNameFor(model => model.Mobile)</td>
+                <td>@Html.DisplayFor(modelItem => item.FlightNumber)</td>
+                <td>@Html.DisplayFor(modelItem => item.SeatNumber)</td>
+                <td>@Html.DisplayFor(modelItem => item.FlightDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.TicketPrice)</td>
+                <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.CommissionEarned)</td>
+                <td>
+                    @Html.ActionLink("Update", "UpdateBooking", new { bookingid = item.BookingId }) |
+                    @Html.ActionLink("Cancel", "CancelBooking", new { bookingid = item.BookingId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Display Total Commission Earned -->
+<div class="alert alert-info">
+    <strong>Total Commission Earned: </strong> @ViewBag.TotalCommission
+</div>
+<style>
+    .alert-info {
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+</style>

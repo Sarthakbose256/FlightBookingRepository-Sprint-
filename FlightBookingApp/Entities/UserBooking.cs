@@ -20,9 +20,10 @@ namespace FlightBookingApp.Entities
         public double TicketPrice {  get; set; }  
         public DateTime BookingDate { get; set; }   
         public string SeatNumber {  get; set; }
-        public string Bookingstatus {  get; set; }
+        public DateTime FlightDate { get; set; }    
         public User User { get; set; }
         public FlightDetail FlightDetails { get; set; }    
+
 
     }
 }

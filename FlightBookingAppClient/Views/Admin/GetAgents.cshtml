@@ -1,0 +1,133 @@
+﻿@model IEnumerable<FlightBookingAppClient.Models.Agent>
+
+@{
+    ViewBag.Title = "Agents";
+}
+
+<!-- Title placed above the table, centered with some spacing -->
+<h2 class="agents-title">Agents</h2>
+
+<!-- Wrapper div for centering the table -->
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.agentId)</th>
+                <th>@Html.DisplayNameFor(model => model.AgentName)</th>
+                <th>@Html.DisplayNameFor(model => model.Email)</th>
+                <th>@Html.DisplayNameFor(model => model.AgentPhone)</th>
+                <th>@Html.DisplayNameFor(model => model.City)</th>
+                <th>@Html.DisplayNameFor(model => model.Location)</th>
+                <th>@Html.DisplayNameFor(model => model.status)</th>
+                <th>@Html.DisplayNameFor(model => model.CreatedAt)</th>
+                <th>@Html.DisplayNameFor(model => model.UpdatedAt)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.agentId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.AgentName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.AgentPhone)</td>
+                    <td>@Html.DisplayFor(modelItem => item.City)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Location)</td>
+                    <td>@Html.DisplayFor(modelItem => item.status)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
+                    <td>@Html.DisplayFor(modelItem => item.UpdatedAt)</td>
+                    <td>
+                        <!-- Action Links placed in a flex container for side-by-side alignment -->
+                        <div class="action-buttons">
+                            @Html.ActionLink("Approve", "Approve", new { ApplicantId = item.agentId }, new { @class = "btn btn-info btn-sm" })
+                            @Html.ActionLink("Reject", "Reject", new { ApplicantId = item.agentId }, new { @class = "btn btn-danger btn-sm" })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Back", "AdminDashboard", null, new { @class = "btn btn-info btn-sm" })
+</p>
+
+<!-- CSS for table hover, bold headers, button layout, centering, and header styling -->
+<style>
+    /* Center the title with some margin */
+    .agents-title {
+        text-align: center; /* Center-align the header */
+        font-size: 2rem; /* Increase font size for visibility */
+        margin-bottom: 20px; /* Add space below the header */
+        font-family: 'Arial', sans-serif; /* Use a clean font */
+        font-weight: bold; /* Make the header bold */
+        color: #333; /* Dark color for the text */
+    }
+
+    /* Center the table-container within the page */
+    .table-container {
+        display: flex;
+        justify-content: center; /* Horizontally center the table */
+        align-items: center; /* Vertically center the table */
+        min-height: 100vh; /* Make the container take the full viewport height */
+        padding: 20px; /* Add some padding around the container */
+    }
+
+    /* Ensure headers are bold and left-aligned */
+    table th {
+        font-weight: bold; /* Make headers bold */
+        text-align: left; /* Left-align the headers */
+        padding: 10px; /* Add padding to headers for consistency */
+    }
+
+    /* Ensure data cells align with headers */
+    table td {
+        text-align: left; /* Align text in data cells to the left */
+        padding: 10px; /* Add padding to data cells for consistency */
+    }
+
+    table {
+        width: 80%; /* Set table width to 80% of the container */
+        border-collapse: collapse; /* Collapse borders to avoid double lines */
+    }
+
+        /* Add spacing and border to the table cells */
+        table td, table th {
+            border: 1px solid #ddd; /* Add a light border to the table */
+        }
+
+        /* Add hover effect for rows */
+        table tbody tr:hover {
+            background-color: #f1f1f1; /* Highlight row on hover */
+        }
+
+    /* Style for the buttons container to align buttons side by side */
+    .action-buttons {
+        display: flex; /* Use flexbox to arrange buttons side by side */
+        gap: 10px; /* Add some space between the buttons */
+    }
+
+        /* Optional: Adjust button sizes if needed */
+        .action-buttons .btn {
+            font-size: 0.9rem; /* Slightly smaller font size */
+            padding: 8px 12px; /* Padding for better button size */
+        }
+
+    /* Styling for the 'Approve' and 'Reject' buttons */
+    .btn-info {
+        background-color: #17a2b8;
+        border-color: #17a2b8;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+
+    /* Button hover effect */
+    .btn:hover {
+        transform: scale(1.05); /* Slightly enlarge the button */
+        transition: transform 0.3s ease; /* Smooth transition */
+    }
+</style>

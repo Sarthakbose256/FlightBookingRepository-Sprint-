@@ -22,7 +22,7 @@ namespace FlightBookingApp.Entities
         public string AgentPhone {  get; set; }
         public string City {  get; set; }
         public string Location {  get; set; }
-        public double CommissionRate { get; set; }
+        public string status {  get; set; }
         public DateTime CreatedAt {  get; set; }
         public DateTime UpdatedAt { get; set; }
 

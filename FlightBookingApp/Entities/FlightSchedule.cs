@@ -22,7 +22,10 @@ namespace FlightBookingApp.Entities
         public DateTime ArrivalTime { get; set; }  
 
         [DataType(DataType.Duration)]
-        public DateTime Duration { get; set; }  
+        public TimeSpan Duration { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime FlightDate { get; set; }
         public string DepartureLoc {  get; set; }
         public string ArrivalLocation {  get; set; }
         public FlightDetail FlightDetails { get; set; }

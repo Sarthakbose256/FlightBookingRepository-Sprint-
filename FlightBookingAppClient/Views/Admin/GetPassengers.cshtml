@@ -1,0 +1,71 @@
+﻿@model IEnumerable<FlightBookingAppClient.Models.PassengerDTO>
+
+<h2>Passengers Details</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Booking Id</th>
+            <th>Flight Number</th>
+            <th>Seat Number</th>
+            <th>Passenger Name</th>
+            <th>Email-Id</th>
+            <th>Booking Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FlightNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SeatNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @item.BookingDate.ToString("yyyy-MM-dd")
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<div>
+    @Html.ActionLink("Back", "GetFlightSchedule", null, new { @class = "btn btn-info btn-sm" })
+</div>
+
+<style>
+    table th {
+        font-weight: bold; /* Make headers bold */
+        text-align: left; /* Left-align the headers */
+    }
+
+    table td {
+        text-align: left; /* Ensure data cells align with headers */
+    }
+
+    table {
+        width: 100%; /* Ensure table takes up full width */
+        border-collapse: collapse; /* Collapse borders to avoid double lines */
+    }
+
+        table td, table th {
+            padding: 8px; /* Add some padding for better spacing */
+            border: 1px solid #ddd; /* Add a light border to the table */
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f1f1; /* Highlight row on hover */
+        }
+</style>
+

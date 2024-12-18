@@ -1,0 +1,56 @@
+﻿@model FlightBookingAppClient.Models.FlightDetail
+
+@{
+    ViewBag.Title = "FlightDetail";
+}
+
+<h2>FlightDetail</h2>
+
+<div>
+    <h4>FlightDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FlightNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlightNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Airline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Airline)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FlightType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlightType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TicketPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TicketPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Discount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Discount)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Proceed to payment", "PaymentPage", new { flightnumber = Model.FlightNumber, price = Model.TicketPrice, discount = Model.Discount })
+</p>

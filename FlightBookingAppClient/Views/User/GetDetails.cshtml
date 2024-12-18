@@ -1,0 +1,124 @@
+﻿@model FlightBookingAppClient.Models.User
+
+@{
+    ViewBag.Title = "Your Details";
+}
+
+
+<div class="container">
+    <div class="card shadow-lg">
+        <div class="card-header bg-info text-white">
+            <h4 class="card-title">User Information</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.UserName)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.UserName)
+                </dd>
+
+                <dt class="col-sm-4 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.password)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.password)
+                </dd>
+
+                <dt class="col-sm-4 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+
+                <dt class="col-sm-4 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.UserPhone)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.UserPhone)
+                </dd>
+            </dl>
+        </div>
+        <div class="card-footer text-center">
+            <p>
+                @Html.ActionLink("Edit", "Update", null, new { @class = "btn btn-info btn-sm mr-3" }) |
+                @Html.ActionLink("Back", "UserDashboard", null, new { @class = "btn btn-secondary btn-sm" })
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- CSS for improved visual appeal -->
+<style>
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .card {
+        margin-top: 20px;
+    }
+
+    .card-header {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .card-body {
+        background-color: #f8f9fa;
+    }
+
+    .card-footer {
+        background-color: #ffffff;
+    }
+
+    dt {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+    dd {
+        font-size: 1rem;
+        color: #555;
+    }
+
+    .btn {
+        font-size: 1rem;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-info {
+        background-color: #17a2b8;
+        border-color: #17a2b8;
+    }
+
+        .btn-info:hover {
+            background-color: #138496;
+            border-color: #117a8b;
+            transform: scale(1.05);
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+            transform: scale(1.05);
+        }
+
+    .font-weight-bold {
+        font-weight: 600;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>

@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "Admin Dashboard";
+}
+
+<main class="dashboard-container">
+    <!-- Logout Button (fixed top right) -->
+    <div class="logout-btn-container">
+        @Html.ActionLink("Logout", "Index", "Home", null, new { @class = "btn btn-danger btn-sm" })
+    </div>
+
+    <section class="row" aria-labelledby="aspnetTitle">
+        <h1 id="title" class="dashboard-title">Admin Dashboard</h1>
+    </section>
+
+    <div class="row">
+        <!-- Button 1: View Schedules -->
+        <section class="col-md-4">
+            <div class="d-flex justify-content-center mb-3">
+                @Html.ActionLink("View Schedules", "GetFlightSchedule", null, new { @class = "btn btn-success btn-lg shadow-lg hover-btn" })
+            </div>
+        </section>
+
+        <!-- Button 2: Approve Agent -->
+        <section class="col-md-4">
+            <div class="d-flex justify-content-center mb-3">
+                @Html.ActionLink("View Agents", "GetAgents", null, new { @class = "btn btn-warning btn-lg shadow-lg hover-btn" })
+            </div>
+        </section>
+
+        <!-- Button 3: Apply Discount -->
+        <section class="col-md-4">
+            <div class="d-flex justify-content-center mb-3">
+                @Html.ActionLink("Apply Discount", "GetFlightDetails", null, new { @class = "btn btn-primary btn-lg shadow-lg hover-btn" })
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- CSS for background image, header styling, and logout button -->
+<style>
+    /* Background image for the entire page */
+    .dashboard-container {
+        background-image: url('https://backtojerusalem.com/wp-content/uploads/2016/11/Pat-Airplane-and-Sky.jpg'); /* Path relative to wwwroot (for ASP.NET Core) */
+        background-size: cover; /* Ensure the image covers the whole page */
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Prevent the image from repeating */
+        min-height: 100vh; /* Ensure it covers the full viewport height */
+        padding: 30px; /* Add some padding around the content */
+    }
+
+    /* Header Styling */
+    .dashboard-title {
+        color: white; /* White color for the header text */
+        font-size: 3rem; /* Large font size for the header */
+        font-family: 'Arial', sans-serif; /* Choose a clean and modern font */
+        font-weight: bold; /* Make the header bold */
+        text-align: center; /* Center align the text */
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); /* Subtle text shadow for better contrast */
+        margin-bottom: 30px; /* Add space below the header */
+        text-transform: uppercase; /* Make the header text uppercase */
+    }
+
+    /* Style for buttons */
+    .btn {
+        width: 100%; /* Make the button fill the column width */
+        font-size: 1.2rem; /* Increase font size for buttons */
+        text-align: center; /* Center text in buttons */
+        padding: 15px; /* Add padding to the buttons */
+        border-radius: 8px; /* Rounded corners for buttons */
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effect */
+    }
+
+        /* Button hover effect */
+        .btn:hover {
+            background-color: #555; /* Darken the button on hover */
+            transform: scale(1.05); /* Slightly enlarge the button */
+        }
+
+    /* Extra button styles for different classes */
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+
+    .btn-warning {
+        background-color: #ffc107;
+        border-color: #ffc107;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    /* Logout Button Style - Fixed at the top-right */
+    .logout-btn-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000; /* Ensure it appears on top */
+    }
+
+        .logout-btn-container .btn {
+            font-size: 1rem;
+            padding: 10px 15px;
+        }
+</style>

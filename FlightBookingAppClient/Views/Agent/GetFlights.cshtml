@@ -1,0 +1,72 @@
+﻿@model IEnumerable<FlightBookingAppClient.Models.FlightScheduleDTO>
+
+@{
+    ViewBag.Title = "GetFlights";
+}
+
+<h2>GetFlights</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FlightNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Airline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartureTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArrivalTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FlightDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartureLoc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArrivalLocation)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlightNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Airline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlightDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureLoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalLocation)
+            </td>
+            <td>
+                @Html.ActionLink("Book", "FlightDetail", new { flightnumber = item.FlightNumber, flightdate = item.FlightDate })
+            </td>
+        </tr>
+    }
+
+</table>

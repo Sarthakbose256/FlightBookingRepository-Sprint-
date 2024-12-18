@@ -1,0 +1,56 @@
+﻿@model IEnumerable<FlightBookingAppClient.Models.FlightDetail>
+
+@{
+    ViewBag.Title = "GetFlightDetails";
+}
+
+<h2>Flight Details</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FlightNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Airline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FlightType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TicketPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Discount)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(model => item.FlightNumber)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Airline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlightType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discount)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "AddDiscount", new { flightnumber = item.FlightNumber }, new { @class = "btn btn-info btn-sm" })
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    @Html.ActionLink("Back", "AdminDashboard",null, new { @class = "btn btn-info btn-sm" })
+</p>
+
