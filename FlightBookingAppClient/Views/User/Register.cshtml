@@ -4,55 +4,107 @@
     ViewBag.Title = "Register";
 }
 
-<h2>Register</h2>
+<h2 class="text-center">Register</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>User</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+    <div class="form-container">
+        <h4 class="text-center">User Registration</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName)
             @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.password)
             @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email)
             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.UserPhone, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserPhone)
             @Html.EditorFor(model => model.UserPhone, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.UserPhone, "", new { @class = "text-danger" })
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Register" class="btn btn-default" />
+
+        <div class="form-group text-center">
+            <input type="submit" value="Register" class="btn btn-primary btn-lg" />
         </div>
     </div>
-</div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="text-center">
+    @Html.ActionLink("Back to login", "Login", null, new { @class = "btn btn-info btn-lg" })
 </div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f7fc;
+        padding: 30px;
+    }
+
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
+
+    .btn {
+        padding: 10px 30px;
+        font-size: 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .btn-info {
+        background-color: #17a2b8;
+        color: white;
+        border: none;
+    }
+
+        .btn-info:hover {
+            background-color: #138496;
+        }
+
+    .text-center {
+        text-align: center;
+    }
+</style>

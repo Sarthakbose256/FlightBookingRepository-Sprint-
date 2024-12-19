@@ -4,10 +4,10 @@
     ViewBag.Title = "Agents";
 }
 
-<!-- Title placed above the table, centered with some spacing -->
+
 <h2 class="agents-title">Agents</h2>
 
-<!-- Wrapper div for centering the table -->
+
 <div class="table-container">
     <table class="table">
         <thead>
@@ -38,7 +38,7 @@
                     <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
                     <td>@Html.DisplayFor(modelItem => item.UpdatedAt)</td>
                     <td>
-                        <!-- Action Links placed in a flex container for side-by-side alignment -->
+                        
                         <div class="action-buttons">
                             @Html.ActionLink("Approve", "Approve", new { ApplicantId = item.agentId }, new { @class = "btn btn-info btn-sm" })
                             @Html.ActionLink("Reject", "Reject", new { ApplicantId = item.agentId }, new { @class = "btn btn-danger btn-sm" })
@@ -53,68 +53,68 @@
     @Html.ActionLink("Back", "AdminDashboard", null, new { @class = "btn btn-info btn-sm" })
 </p>
 
-<!-- CSS for table hover, bold headers, button layout, centering, and header styling -->
+
 <style>
-    /* Center the title with some margin */
+   
     .agents-title {
-        text-align: center; /* Center-align the header */
-        font-size: 2rem; /* Increase font size for visibility */
-        margin-bottom: 20px; /* Add space below the header */
-        font-family: 'Arial', sans-serif; /* Use a clean font */
-        font-weight: bold; /* Make the header bold */
-        color: #333; /* Dark color for the text */
+        text-align: center; 
+        font-size: 2rem; 
+        margin-bottom: 20px; 
+        font-family: 'Arial', sans-serif; 
+        font-weight: bold; 
+        color: #333; 
     }
 
-    /* Center the table-container within the page */
+    
     .table-container {
         display: flex;
-        justify-content: center; /* Horizontally center the table */
-        align-items: center; /* Vertically center the table */
-        min-height: 100vh; /* Make the container take the full viewport height */
-        padding: 20px; /* Add some padding around the container */
+        justify-content: center; 
+        align-items: center; 
+        min-height: 100vh; 
+        padding: 20px; 
     }
 
-    /* Ensure headers are bold and left-aligned */
+  
     table th {
-        font-weight: bold; /* Make headers bold */
-        text-align: left; /* Left-align the headers */
-        padding: 10px; /* Add padding to headers for consistency */
+        font-weight: bold;
+        text-align: left;
+        padding: 10px; 
     }
 
-    /* Ensure data cells align with headers */
+    
     table td {
-        text-align: left; /* Align text in data cells to the left */
-        padding: 10px; /* Add padding to data cells for consistency */
+        text-align: left; 
+        padding: 10px; 
     }
 
     table {
-        width: 80%; /* Set table width to 80% of the container */
-        border-collapse: collapse; /* Collapse borders to avoid double lines */
+        width: 80%;
+        border-collapse: collapse; 
     }
 
-        /* Add spacing and border to the table cells */
+        
         table td, table th {
-            border: 1px solid #ddd; /* Add a light border to the table */
+            border: 1px solid #ddd; 
         }
 
-        /* Add hover effect for rows */
+        
         table tbody tr:hover {
-            background-color: #f1f1f1; /* Highlight row on hover */
+            background-color: #f1f1f1; 
         }
 
-    /* Style for the buttons container to align buttons side by side */
+   
     .action-buttons {
-        display: flex; /* Use flexbox to arrange buttons side by side */
-        gap: 10px; /* Add some space between the buttons */
+        display: flex; 
+        gap: 10px;
     }
 
-        /* Optional: Adjust button sizes if needed */
+        
         .action-buttons .btn {
-            font-size: 0.9rem; /* Slightly smaller font size */
-            padding: 8px 12px; /* Padding for better button size */
+            font-size: 0.9rem; 
+            padding: 8px 12px; 
         }
 
-    /* Styling for the 'Approve' and 'Reject' buttons */
+    
     .btn-info {
         background-color: #17a2b8;
         border-color: #17a2b8;
@@ -125,9 +125,9 @@
         border-color: #dc3545;
     }
 
-    /* Button hover effect */
+    
     .btn:hover {
-        transform: scale(1.05); /* Slightly enlarge the button */
-        transition: transform 0.3s ease; /* Smooth transition */
+        transform: scale(1.05); 
+        transition: transform 0.3s ease; 
     }
 </style>

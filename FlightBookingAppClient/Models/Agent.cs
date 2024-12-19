@@ -24,6 +24,7 @@ namespace FlightBookingAppClient.Models
 
         [DisplayName("Email")]
         [EmailAddress(ErrorMessage = "enter valid email")]
+        [Required(ErrorMessage = "email required")]
         public string Email { get; set; }
 
         [StringLength(10)]

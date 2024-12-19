@@ -4,60 +4,110 @@
     ViewBag.Title = "UpdateBooking";
 }
 
-<h2>UpdateBooking</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<div class="container mt-5">
+  
+    <h2 class="text-center mb-4 text-primary">Update Booking</h2>
+
     
-<div class="form-horizontal">
-    <h4>AgentBooking</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.BookingId)
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.AgentId)
+        <div class="form-horizontal">
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+            
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.BookingId)
+            @Html.HiddenFor(model => model.AgentId)
+            @Html.HiddenFor(model => model.FlightDate)
+            @Html.HiddenFor(model => model.TicketPrice)
+            @Html.HiddenFor(model => model.BookingDate)
+            @Html.HiddenFor(model => model.CommissionEarned)
+
+            
+            <div class="form-group">
+                @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            
+            <div class="form-group">
+                @Html.LabelFor(model => model.SeatNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SeatNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SeatNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+           
+            <div class="form-group text-center">
+                <div class="col-md-12">
+                    <input type="submit" value="Save" class="btn btn-success btn-lg" />
+                </div>
+            </div>
         </div>
-    </div>
+    }
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.SeatNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SeatNumber, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SeatNumber, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.FlightDate)
-
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.TicketPrice)
-
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.BookingDate)
-
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.CommissionEarned)
-
-
-
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
+   
+    <div class="text-center mt-3">
+        @Html.ActionLink("Back to Booking History", "BookHistory", null, new { @class = "btn btn-info btn-sm" })
     </div>
 </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+<style>
+    
+    body {
+        background-color: #f9f9f9;
+        font-family: 'Arial', sans-serif;
+    }
+
+   
+    .container {
+        padding: 30px;
+    }
+
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+   
+    .control-label {
+        font-size: 1.1em;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+   
+    .btn-success {
+        font-size: 1.2em;
+        padding: 12px 25px;
+        width: 180px;
+        transition: background-color 0.3s ease;
+    }
+
+        
+        .btn-success:hover {
+            background-color: #28a745;
+            cursor: pointer;
+        }
+
+    
+    .btn-info {
+        font-size: 1.1em;
+        padding: 10px 20px;
+        margin-top: 10px;
+    }
+
+    
+    .text-danger {
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+</style>

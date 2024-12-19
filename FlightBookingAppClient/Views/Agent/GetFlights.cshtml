@@ -4,69 +4,110 @@
     ViewBag.Title = "GetFlights";
 }
 
-<h2>GetFlights</h2>
+<div class="container">
+    <h2 class="text-center my-4">Available Flights</h2>
+
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.FlightNumber)</th>
+                <th>@Html.DisplayNameFor(model => model.Airline)</th>
+                <th>@Html.DisplayNameFor(model => model.DepartureTime)</th>
+                <th>@Html.DisplayNameFor(model => model.ArrivalTime)</th>
+                <th>@Html.DisplayNameFor(model => model.Duration)</th>
+                <th>@Html.DisplayNameFor(model => model.FlightDate)</th>
+                <th>@Html.DisplayNameFor(model => model.DepartureLoc)</th>
+                <th>@Html.DisplayNameFor(model => model.ArrivalLocation)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.FlightNumber)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Airline)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DepartureTime)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ArrivalTime)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Duration)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FlightDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DepartureLoc)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ArrivalLocation)</td>
+                    <td>
+                        @Html.ActionLink("Book", "FlightDetail", new { flightnumber = item.FlightNumber, flightdate = item.FlightDate }, new { @class = "btn btn-success btn-sm" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-center">
+        <p>
+            @Html.ActionLink("Back to Search", "Searchflights", null, new { @class = "btn btn-info btn-sm" })
+        </p>
+    </div>
+</div>
 
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FlightNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Airline)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DepartureTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ArrivalTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Duration)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FlightDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DepartureLoc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ArrivalLocation)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FlightNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Airline)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DepartureTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArrivalTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Duration)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FlightDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DepartureLoc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArrivalLocation)
-            </td>
-            <td>
-                @Html.ActionLink("Book", "FlightDetail", new { flightnumber = item.FlightNumber, flightdate = item.FlightDate })
-            </td>
-        </tr>
+<style>
+    .container {
+        margin-top: 30px;
+        margin-bottom: 30px;
     }
 
-</table>
+    .table {
+        width: 100%;
+        margin-top: 20px;
+        font-size: 1rem;
+        border-collapse: collapse;
+    }
+
+        .table th, .table td {
+            padding: 12px;
+            text-align: left;
+        }
+
+    .thead-dark {
+        background-color: #343a40;
+        color: white;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f9f9f9;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+        padding: 8px 16px;
+        font-size: 1rem;
+    }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+    .btn-info {
+        background-color: #17a2b8;
+        border-color: #17a2b8;
+    }
+
+        .btn-info:hover {
+            background-color: #138496;
+            border-color: #117a8b;
+        }
+
+    .my-4 {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>

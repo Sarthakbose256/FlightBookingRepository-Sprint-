@@ -2,19 +2,112 @@
     ViewBag.Title = "Search Flights";
 }
 
-<h2>Search Flights</h2>
+<div class="container">
+    <div class="card shadow-lg">
+        <div class="card-header bg-info text-white">
+            <h4>Search Flights</h4>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("GetFlights", "Agent", FormMethod.Get, new { @class = "search-form" }))
+            {
+                <div class="form-group">
+                    <label for="source" class="control-label">Source</label>
+                    <input type="text" name="source" id="source" class="form-control" required placeholder="Enter source city" />
+                </div>
 
-@using (Html.BeginForm("GetFlights", "Agent", FormMethod.Get, new { @class = "search-form" }))
-{
-    <div>
-        <label for="source">Source</label>
-        <input type="text" name="source" id="source" required placeholder="Enter source city" />
+                <div class="form-group">
+                    <label for="destination" class="control-label">Destination</label>
+                    <input type="text" name="destination" id="destination" class="form-control" required placeholder="Enter destination city" />
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Search</button>
+                </div>
+            }
+            <p class="text-center">
+                @Html.ActionLink("Back", "AgentDashboard", null, new { @class = "btn btn-info btn-sm" })
+            </p>
+        </div>
     </div>
-    <div>
-        <label for="destination">Destination</label>
-        <input type="text" name="destination" id="destination" required placeholder="Enter destination city" />
-    </div>
-    <div>
-        <button type="submit" class="btn btn-primary">Search</button>
-    </div>
-}
+</div>
+
+
+<style>
+    .container {
+        max-width: 600px;
+        margin-top: 30px;
+    }
+
+    .card {
+        border-radius: 8px;
+    }
+
+    .card-header {
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    .card-body {
+        background-color: #f8f9fa;
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        font-size: 1rem;
+    }
+
+        .form-control:focus {
+            border-color: #80bdff;
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+        }
+
+    .btn-block {
+        width: 100%;
+        padding: 12px;
+        border-radius: 5px;
+        font-size: 1.2rem;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+    .text-center {
+        margin-top: 20px;
+    }
+
+    .btn-info {
+        background-color: #17a2b8;
+        border-color: #17a2b8;
+    }
+
+        .btn-info:hover {
+            background-color: #138496;
+            border-color: #117a8b;
+        }
+
+    .search-form {
+        padding: 20px;
+    }
+</style>

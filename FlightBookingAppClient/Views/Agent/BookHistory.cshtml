@@ -4,57 +4,117 @@
     ViewBag.Title = "BookHistory";
 }
 
-<h2>BookHistory</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="container mt-5">
+    <h2 class="text-center mb-4 text-primary">Booking History</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.CustomerName)</th>
-            <th>@Html.DisplayNameFor(model => model.Email)</th>
-            <th>@Html.DisplayNameFor(model => model.Mobile)</th>
-            <th>@Html.DisplayNameFor(model => model.FlightNumber)</th>
-            <th>@Html.DisplayNameFor(model => model.SeatNumber)</th>
-            <th>@Html.DisplayNameFor(model => model.FlightDate)</th>
-            <th>@Html.DisplayNameFor(model => model.TicketPrice)</th>
-            <th>@Html.DisplayNameFor(model => model.BookingDate)</th>
-            <th>@Html.DisplayNameFor(model => model.CommissionEarned)</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-                <td>@Html.DisplayNameFor(model => model.Email)</td>
-                <td>@Html.DisplayNameFor(model => model.Mobile)</td>
-                <td>@Html.DisplayFor(modelItem => item.FlightNumber)</td>
-                <td>@Html.DisplayFor(modelItem => item.SeatNumber)</td>
-                <td>@Html.DisplayFor(modelItem => item.FlightDate)</td>
-                <td>@Html.DisplayFor(modelItem => item.TicketPrice)</td>
-                <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
-                <td>@Html.DisplayFor(modelItem => item.CommissionEarned)</td>
-                <td>
-                    @Html.ActionLink("Update", "UpdateBooking", new { bookingid = item.BookingId }) |
-                    @Html.ActionLink("Cancel", "CancelBooking", new { bookingid = item.BookingId })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+   
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover" style="max-width: 90%; margin: 0 auto;">
+            <thead class="thead-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.CustomerName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Email)</th>
+                    <th>@Html.DisplayNameFor(model => model.Mobile)</th>
+                    <th>@Html.DisplayNameFor(model => model.FlightNumber)</th>
+                    <th>@Html.DisplayNameFor(model => model.SeatNumber)</th>
+                    <th>@Html.DisplayNameFor(model => model.FlightDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.TicketPrice)</th>
+                    <th>@Html.DisplayNameFor(model => model.BookingDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.CommissionEarned)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Mobile)</td>
+                        <td>@Html.DisplayFor(modelItem => item.FlightNumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.SeatNumber)</td>
+                        <td>@Html.DisplayFor(modelItem => item.FlightDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.TicketPrice)</td>
+                        <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.CommissionEarned)</td>
+                        <td>
+                           
+                            @Html.ActionLink("Update", "UpdateBooking", new { bookingid = item.BookingId }, new { @class = "btn btn-warning btn-sm mr-2" })
+                            |
+                            @Html.ActionLink("Cancel", "CancelBooking", new { bookingid = item.BookingId }, new { @class = "btn btn-danger btn-sm ml-2" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
-<!-- Display Total Commission Earned -->
-<div class="alert alert-info">
-    <strong>Total Commission Earned: </strong> @ViewBag.TotalCommission
+   
+    <div class="alert alert-info text-center">
+        <strong>Total Commission Earned: </strong> <span class="font-weight-bold">@ViewBag.TotalCommission</span>
+    </div>
+
+    
+    <p class="text-center">
+        @Html.ActionLink("Back", "AgentDashboard", null, new { @class = "btn btn-info btn-sm" })
+    </p>
 </div>
+
+
 <style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .table th, .table td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .thead-dark th {
+        background-color: #343a40;
+        color: white;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f2f2f2;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #e9ecef;
+    }
+
+    .btn-warning, .btn-danger {
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-danger:hover {
+            background-color: #dc3545;
+        }
+
     .alert-info {
         font-size: 1.2em;
         font-weight: bold;
         margin-top: 20px;
+        padding: 15px;
+    }
+
+    .font-weight-bold {
+        font-weight: bold;
+        font-size: 1.3em;
+    }
+
+    
+    .table-responsive {
+        max-width: 1200px;
+        margin: 0 auto;
     }
 </style>

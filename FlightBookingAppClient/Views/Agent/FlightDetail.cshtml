@@ -4,53 +4,126 @@
     ViewBag.Title = "FlightDetail";
 }
 
-<h2>FlightDetail</h2>
+<div class="container">
+    <h2 class="text-center my-4">Flight Details</h2>
 
-<div>
-    <h4>FlightDetail</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FlightNumber)
-        </dt>
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4>Flight Information</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.FlightNumber)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.FlightNumber)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.FlightNumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Airline)
-        </dt>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Airline)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Airline)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Airline)
-        </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.FlightType)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.FlightType)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FlightType)
-        </dt>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.TicketPrice)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.TicketPrice)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.FlightType)
-        </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Discount)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Discount)
+                </dd>
+            </dl>
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TicketPrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TicketPrice)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Discount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Discount)
-        </dd>
-
-    </dl>
+    <div class="text-center my-4">
+        <p>
+            @Html.ActionLink("Proceed to Payment", "PaymentPage",
+                new { flightnumber = Model.FlightNumber, price = Model.TicketPrice, discount = Model.Discount },
+                new { @class = "btn btn-success btn-lg" })
+        </p>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Proceed to payment", "PaymentPage", new { flightnumber = Model.FlightNumber, price = Model.TicketPrice, discount = Model.Discount })
-</p>
+
+<!-- Custom Styling -->
+<style>
+    .container {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .card {
+        margin-top: 20px;
+        border-radius: 10px;
+    }
+
+    .card-header {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .card-body {
+        font-size: 1.1rem;
+    }
+
+    dl.row {
+        margin: 0;
+    }
+
+    dt {
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    dd {
+        margin-left: 0;
+        color: #495057;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+        padding: 10px 20px;
+        font-size: 1.1rem;
+    }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+    .btn-info {
+        background-color: #17a2b8;
+        border-color: #17a2b8;
+        padding: 8px 16px;
+    }
+
+        .btn-info:hover {
+            background-color: #138496;
+            border-color: #117a8b;
+        }
+
+    .my-4 {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>
