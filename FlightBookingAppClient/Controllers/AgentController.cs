@@ -254,8 +254,12 @@ namespace FlightBookingAppClient.Controllers
         {
             try
             {
-                Session["customer"] = customer;
-                return RedirectToAction("Searchflights");
+                if (ModelState.IsValid)
+                {
+                    Session["customer"] = customer;
+                    return RedirectToAction("Searchflights"); 
+                }
+                return View();
             }
             catch (Exception)
             {

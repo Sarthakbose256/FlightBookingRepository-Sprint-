@@ -18,15 +18,18 @@ namespace FlightBookingAppClient.Models
         public string Airline { get; set; }
 
         [DisplayName("Departure Time")]
+        [DataType(DataType.Time)]
         public DateTime DepartureTime { get; set; }
 
         [DisplayName("Arrival Time")]
+        [DataType(DataType.Time)]
         public DateTime ArrivalTime { get; set; }
 
         [DisplayName("Duration")]
         public TimeSpan Duration { get; set; }
 
         [DisplayName("Flight Date")]
+        [DataType(DataType.Date)]
         public DateTime FlightDate { get; set; }
 
         [DisplayName("Departure")]
